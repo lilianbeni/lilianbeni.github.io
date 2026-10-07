@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>策驰影院-影视资源导航与在线观影指南</title>
+<meta name="description" content="策驰影院提供影视资源分类导航、热门影片推荐、剧集更新动态与在线观影常识，帮助用户快速了解电影、电视剧、综艺、动漫等内容的查找方式与选择建议。">
+<meta name="keywords" content="策驰影院,影视导航,在线观影,电影推荐,电视剧,综艺,动漫,影视资源">
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0d0f16;
+--bg-soft:#141824;
+--card:#1a1f2e;
+--card-hover:#222840;
+--line:#2a3145;
+--text:#e8ecf5;
+--text-dim:#9aa4bd;
+--accent:#ff5c39;
+--accent-soft:rgba(255,92,57,.14);
+--gold:#f7c948;
+--radius:14px;
+}
+html{scroll-behavior:smooth}
+body{
+background:var(--bg);
+color:var(--text);
+font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+line-height:1.7;
+font-size:15px;
+-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* ---------- 顶部 ---------- */
+.topbar{
+position:sticky;top:0;z-index:50;
+background:rgba(13,15,22,.92);
+backdrop-filter:blur(10px);
+border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+display:flex;align-items:center;justify-content:space-between;
+height:64px;gap:24px;
+}
+.logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:.5px}
+.logo-mark{
+width:34px;height:34px;border-radius:9px;
+background:linear-gradient(135deg,#ff5c39,#f7c948);
+display:flex;align-items:center;justify-content:center;
+font-size:17px;color:#1a1200;font-weight:800;
+}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{
+padding:7px 14px;border-radius:8px;font-size:14px;color:var(--text-dim);
+transition:.2s;
+}
+.nav a:hover,.nav a.active{color:#fff;background:var(--accent-soft)}
+.search-box{
+display:flex;align-items:center;gap:8px;
+background:var(--bg-soft);border:1px solid var(--line);
+border-radius:999px;padding:6px 6px 6px 16px;min-width:230px;
+}
+.search-box input{
+background:none;border:none;outline:none;color:var(--text);
+font-size:14px;width:100%;font-family:inherit;
+}
+.search-box input::placeholder{color:#5d6784}
+.search-box button{
+background:var(--accent);color:#fff;border:none;border-radius:999px;
+padding:6px 16px;font-size:13px;cursor:pointer;font-family:inherit;
+transition:.2s;
+}
+.search-box button:hover{background:#ff7455}
+
+/* ---------- Hero ---------- */
+.hero{
+position:relative;overflow:hidden;
+padding:56px 0 48px;
+background:
+radial-gradient(900px 400px at 12% -10%,rgba(255,92,57,.20),transparent 60%),
+radial-gradient(700px 380px at 88% 0%,rgba(247,201,72,.12),transparent 65%),
+var(--bg-soft);
+border-bottom:1px solid var(--line);
+}
+.hero-grid{display:grid;grid-template-columns:1.25fr .95fr;gap:44px;align-items:center}
+.hero-tag{
+display:inline-block;font-size:12.5px;letter-spacing:1px;
+color:var(--gold);border:1px solid rgba(247,201,72,.4);
+border-radius:999px;padding:4px 14px;margin-bottom:18px;
+}
+.hero h1{font-size:38px;line-height:1.3;font-weight:800;letter-spacing:.5px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:16px;color:var(--text-dim);font-size:15.5px;max-width:600px}
+.hero-actions{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+display:inline-flex;align-items:center;gap:8px;
+padding:11px 26px;border-radius:10px;font-size:14.5px;font-weight:600;
+transition:.2s;border:1px solid transparent;cursor:pointer;font-family:inherit;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#ff7455;transform:translateY(-1px)}
+.btn-ghost{border-color:var(--line);color:var(--text-dim);background:transparent}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-stats{
+margin-top:30px;display:flex;gap:34px;flex-wrap:wrap;
+padding-top:22px;border-top:1px dashed var(--line);
+}
+.hero-stats div strong{display:block;font-size:19px;color:var(--gold);font-weight:700}
+.hero-stats div span{font-size:12.5px;color:var(--text-dim)}
+
+.hero-panel{
+background:var(--card);border:1px solid var(--line);
+border-radius:var(--radius);padding:22px;
+}
+.hero-panel h2{font-size:16px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-panel h2::before{
+content:"";width:4px;height:16px;border-radius:2px;background:var(--accent);
+}
+.rank-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.rank-list li{
+display:flex;align-items:center;gap:12px;
+padding:9px 10px;border-radius:9px;transition:.2s;font-size:14px;
+}
+.rank-list li:hover{background:var(--card-hover)}
+.rank-no{
+width:22px;height:22px;flex:0 0 22px;border-radius:6px;
+display:flex;align-items:center;justify-content:center;
+font-size:12px;font-weight:700;background:#262d42;color:var(--text-dim);
+}
+.rank-list li:nth-child(1) .rank-no{background:linear-gradient(135deg,#ff5c39,#ff8a3d);color:#fff}
+.rank-list li:nth-child(2) .rank-no{background:linear-gradient(135deg,#f7c948,#f79b48);color:#3a2a00}
+.rank-list li:nth-child(3) .rank-no{background:linear-gradient(135deg,#8f7bff,#5f8bff);color:#fff}
+.rank-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-type{font-size:12px;color:var(--text-dim);background:var(--bg-soft);padding:2px 9px;border-radius:6px}
+
+/* ---------- 通用区块 ---------- */
+section{padding:52px 0}
+.section-head{
+display:flex;align-items:flex-end;justify-content:space-between;
+gap:20px;margin-bottom:26px;flex-wrap:wrap;
+}
+.section-head h2{font-size:23px;font-weight:700;letter-spacing:.4px}
+.section-head h2 small{
+display:block;font-size:13px;color:var(--text-dim);font-weight:400;
+margin-top:6px;letter-spacing:0;
+}
+.section-head .more{font-size:13.5px;color:var(--accent)}
+.section-head .more:hover{text-decoration:underline}
+
+/* ---------- 分类 ---------- */
+.cat-grid{
+display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;
+}
+.cat-card{
+background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+padding:18px;transition:.22s;display:block;
+}
+.cat-card:hover{background:var(--card-hover);border-color:#3a4360;transform:translateY(-3px)}
+.cat-icon{
+width:38px;height:38px;border-radius:10px;display:flex;align-items:center;
+justify-content:center;font-size:18px;margin-bottom:12px;
+background:var(--accent-soft);color:var(--accent);
+}
+.cat-card h3{font-size:15.5px;margin-bottom:6px}
+.cat-card p{font-size:13px;color:var(--text-dim);line-height:1.6}
+
+/* ---------- 影片卡片 ---------- */
+.movie-grid{
+display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:18px;
+}
+.movie-card{
+background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+overflow:hidden;transition:.22s;
+}
+.movie-card:hover{transform:translateY(-4px);border-color:#3a4360;box-shadow:0 12px 26px rgba(0,0,0,.35)}
+.poster{
+height:132px;display:flex;align-items:center;justify-content:center;
+font-size:15px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.9);
+position:relative;
+}
+.poster::after{
+content:"";position:absolute;inset:0;
+background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.45));
+}
+.poster span{position:relative;z-index:1;text-align:center;padding:0 12px}
+.p1{background:linear-gradient(135deg,#3b2f6b,#6b3f7a)}
+.p2{background:linear-gradient(135deg,#1f4a5c,#2f7a6b)}
+.p3{background:linear-gradient(135deg,#6b2f3b,#a04a3a)}
+.p4{background:linear-gradient(135deg,#2f3d6b,#4a5fa0)}
+.p5{background:linear-gradient(135deg,#5c4a1f,#8a6b2f)}
+.p6{background:linear-gradient(135deg,#3d2f5c,#5c3f8a)}
+.movie-body{padding:14px 15px 16px}
+.movie-body h3{font-size:15px;margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.movie-meta{font-size:12.5px;color:var(--text-dim);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px}
+.movie-meta i{font-style:normal;background:var(--bg-soft);padding:1px 8px;border-radius:5px}
+.movie-desc{font-size:13px;color:var(--text-dim);line-height:1.65;
+display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ---------- 更新列表 ---------- */
+.update-wrap{
+display:grid;grid-template-columns:1.6fr 1fr;gap:22px;align-items:start;
+}
+.update-list{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.update-item{
+display:flex;align-items:center;gap:14px;padding:14px 18px;
+border-bottom:1px solid var(--line);transition:.18s;
+}
+.update-item:last-child{border-bottom:none}
+.update-item:hover{background:var(--card-hover)}
+.update-badge{
+flex:0 0 46px;height:46px;border-radius:10px;display:flex;flex-direction:column;
+align-items:center;justify-content:center;font-size:11px;color:#fff;
+background:linear-gradient(135deg,#2b3350,#3c4668);line-height:1.25;
+}
+.update-badge b{font-size:15px;font-weight:700}
+.update-info{flex:1;min-width:0}
+.update-info h3{font-size:14.5px;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.update-info p{font-size:12.5px;color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.update-tag{
+font-size:12px;color:var(--gold);border:1px solid rgba(247,201,72,.35);
+padding:2px 10px;border-radius:999px;white-space:nowrap;
+}
+
+.side-card{
+background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+padding:20px;margin-bottom:20px;
+}
+.side-card h3{font-size:15.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.side-card h3::before{content:"";width:4px;height:15px;border-radius:2px;background:var(--gold)}
+.tip-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+.tip-list li{font-size:13.5px;color:var(--text-dim);line-height:1.65;padding-left:16px;position:relative}
+.tip-list li::before{
+content:"";position:absolute;left:0;top:9px;width:6px;height:6px;
+border-radius:50%;background:var(--accent);
+}
+.tip-list li strong{color:var(--text);font-weight:600}
+
+/* ---------- 指南文章 ---------- */
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.guide-card{
+background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+padding:22px;transition:.22s;
+}
+.guide-card:hover{border-color:#3a4360;background:var(--card-hover)}
+.guide-card h3{font-size:16.5px;margin-bottom:10px}
+.guide-card p{font-size:13.8px;color:var(--text-dim);line-height:1.75}
+
+/* ---------- FAQ ---------- */
+.faq-list{display:flex;flex-direction:column;gap:12px;max-width:900px}
+.faq-item{
+background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+overflow:hidden;
+}
+.faq-item summary{
+list-style:none;cursor:pointer;padding:16px 20px;font-size:15px;font-weight:600;
+display:flex;align-items:center;justify-content:space-between;gap:14px;
+transition:.2s;
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{
+content:"+";font-size:19px;color:var(--accent);font-weight:400;line-height:1;
+transition:.25s;
+}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item summary:hover{background:var(--card-hover)}
+.faq-item .faq-body{
+padding:0 20px 18px;font-size:14px;color:var(--text-dim);line-height:1.8;
+border-top:1px solid var(--line);padding-top:15px;margin-top:0;
+}
+
+/* ---------- 页脚 ---------- */
+footer{
+background:var(--bg-soft);border-top:1px solid var(--line);
+padding:44px 0 30px;margin-top:20px;
+}
+.foot-grid{
+display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px;
+padding-bottom:28px;border-bottom:1px solid var(--line);
+}
+.foot-brand p{font-size:13.5px;color:var(--text-dim);margin-top:12px;line-height:1.75;max-width:320px}
+.foot-col h4{font-size:14px;margin-bottom:14px;color:var(--text)}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-col a{font-size:13.5px;color:var(--text-dim);transition:.2s}
+.foot-col a:hover{color:var(--accent)}
+.foot-bottom{
+padding-top:22px;display:flex;justify-content:space-between;gap:16px;
+flex-wrap:wrap;font-size:12.5px;color:#6b7590;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:980px){
+.hero-grid{grid-template-columns:1fr;gap:34px}
+.update-wrap{grid-template-columns:1fr}
+.foot-grid{grid-template-columns:1fr 1fr}
+.hero h1{font-size:31px}
+}
+@media (max-width:760px){
+.topbar-inner{height:auto;padding:12px 0;flex-wrap:wrap;gap:12px}
+.nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+.nav a{white-space:nowrap}
+.search-box{min-width:0;flex:1}
+.hero{padding:40px 0 36px}
+.hero h1{font-size:26px}
+.hero-stats{gap:22px}
+section{padding:40px 0}
+.section-head h2{font-size:20px}
+.movie-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.poster{height:110px}
+.foot-grid{grid-template-columns:1fr;gap:24px}
+}
+@media (max-width:420px){
+.cat-grid{grid-template-columns:1fr 1fr}
+.movie-grid{grid-template-columns:1fr 1fr}
+.update-item{padding:12px 14px;gap:11px}
+.update-badge{flex-basis:40px;height:40px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="logo" href="#top">
+      <span class="logo-mark">策</span>
+      策驰<span>影院</span>
+    </a>
+    <nav class="nav">
+      <a href="#category" class="active">影视分类</a>
+      <a href="#hot">热门推荐</a>
+      <a href="#update">更新动态</a>
+      <a href="#guide">观影指南</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <form class="search-box" onsubmit="return false;">
+      <input type="search" placeholder="搜索影片、剧集或演员" aria-label="搜索影片">
+      <button type="submit">搜索</button>
+    </form>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="hero-tag">影视资源导航 · 观影参考</span>
+        <h1>策驰影院：<em>快速找到想看的电影与剧集</em></h1>
+        <p class="lead">
+          策驰影院是一个面向中文用户的影视内容导航页面。这里按电影、电视剧、综艺、动漫、纪录片等类型整理入口，
+          汇总近期讨论度较高的作品与更新动态，并提供挑选影片、判断画质与规避风险资源的实用建议，
+          帮助你在有限时间里更快决定“今晚看什么”。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#hot">浏览热门推荐</a>
+          <a class="btn btn-ghost" href="#guide">查看观影指南</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>6 大类</strong><span>影视内容分类</span></div>
+          <div><strong>每日</strong><span>更新动态整理</span></div>
+          <div><strong>多终端</strong><span>手机与电脑适配</span></div>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <h2>本周关注榜</h2>
+        <ol class="rank-list">
+          <li><span class="rank-no">1</span><span class="rank-name">院线新片讨论合集</span><span class="rank-type">电影</span></li>
+          <li><span class="rank-no">2</span><span class="rank-name">都市情感剧集盘点</span><span class="rank-type">电视剧</span></li>
+          <li><span class="rank-no">3</span><span class="rank-name">悬疑推理题材精选</span><span class="rank-type">剧集</span></li>
+          <li><span class="rank-no">4</span><span class="rank-name">国产动画长片推荐</span><span class="rank-type">动漫</span></li>
+          <li><span class="rank-no">5</span><span class="rank-name">治愈系慢综艺清单</span><span class="rank-type">综艺</span></li>
+          <li><span class="rank-no">6</span><span class="rank-name">自然与人文纪录片</span><span class="rank-type">纪录片</span></li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 分类 -->
+  <section id="category">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>影视分类导航<small>按内容类型快速定位，减少无效翻找</small></h2>
+        <a class="more" href="#hot">查看热门内容 →</a>
+      </div>
+      <div class="cat-grid">
+        <a class="cat-card" href="#hot">
+          <div class="cat-icon">🎬</div>
+          <h3>电影</h3>
+          <p>院线片、经典片与类型片，按剧情、动作、科幻、喜剧等方向浏览。</p>
+        </a>
+        <a class="cat-card" href="#hot">
+          <div class="cat-icon">📺</div>
+          <h3>电视剧</h3>
+          <p>国产剧、海外剧与短剧，关注更新节奏和完结状态更省心。</p>
+        </a>
+        <a class="cat-card" href="#hot">
+          <div class="cat-icon">🎤</div>
+          <h3>综艺</h3>
+          <p>竞技、生活、访谈与音乐类节目，适合碎片时间轻松观看。</p>
+        </a>
+        <a class="cat-card" href="#hot">
+          <div class="cat-icon">🌸</div>
+          <h3>动漫</h3>
+          <p>国产动画、日番与剧场版，按季度与题材整理观看顺序。</p>
+        </a>
+        <a class="cat-card" href="#hot">
+          <div class="cat-icon">🌍</div>
+          <h3>纪录片</h3>
+          <p>自然、历史、科技与人文题材，适合深度观看与知识补充。</p>
+        </a>
+        <a class="cat-card" href="#hot">
+          <div class="cat-icon">🎞️</div>
+          <h3>短片与合集</h3>
+          <p>微电影、独立短片与主题合集，单集时长短、观看门槛低。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 热门推荐 -->
+  <section id="hot" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>热门推荐<small>按题材与观看场景整理，方便按需挑选</small></h2>
+        <a class="more" href="#update">查看更新动态 →</a>
+      </div>
+      <div class="movie-grid">
+
+        <article class="movie-card">
+          <div class="poster p1"><span>悬疑推理</span></div>
+          <div class="movie-body">
+            <h3>推理剧集精选</h3>
+            <div class="movie-meta"><i>剧集</i><i>多季</i><i>适合追剧</i></div>
+            <p class="movie-desc">线索密集、节奏紧凑的推理题材，适合喜欢边看边猜的观众，建议连续观看以免遗漏伏笔。</p>
+          </div>
+        </article>
+
+        <article class="movie-card">
+          <div class="poster p2"><span>自然纪录片</span></div>
+          <div class="movie-body">
+            <h3>自然与生态</h3>
+            <div class="movie-meta"><i>纪录片</i><i>单集完结</i><i>家庭观看</i></div>
+            <p class="movie-desc">画面质感突出，适合全家一起观看，也常被用作了解地理与生物知识的补充材料。</p>
+          </div>
+        </article>
+
+        <article class="movie-card">
+          <div class="poster p3"><span>都市情感</span></div>
+          <div class="movie-body">
+            <h3>都市生活剧</h3>
+            <div class="movie-meta"><i>电视剧</i><i>更新中</i><i>轻松向</i></div>
+            <p class="movie-desc">围绕职场、家庭与情感展开，节奏相对舒缓，适合下班后放松观看。</p>
+          </div>
+        </article>
+
+        <article class="movie-card">
+          <div class="poster p4"><span>科幻想象</span></div>
+          <div class="movie-body">
+            <h3>科幻与未来</h3>
+            <div class="movie-meta"><i>电影</i><i>长片</i><i>视觉向</i></div>
+            <p class="movie-desc">以设定和视觉见长的作品，观看时建议选择较大屏幕，更能体会画面细节。</p>
+          </div>
+        </article>
+
+        <article class="movie-card">
+          <div class="poster p5"><span>治愈综艺</span></div>
+          <div class="movie-body">
+            <h3>慢节奏综艺</h3>
+            <div class="movie-meta"><i>综艺</i><i>周更</i><i>碎片时间</i></div>
+            <p class="movie-desc">生活观察与旅行类节目，单集信息量适中，适合吃饭或通勤时随手播放。</p>
+          </div>
+        </article>
+
+        <article class="movie-card">
+          <div class="poster p6"><span>国产动画</span></div>
+          <div class="movie-body">
+            <h3>动画长片</h3>
+            <div class="movie-meta"><i>动漫</i><i>剧场版</i><i>合家欢</i></div>
+            <p class="movie-desc">题材覆盖神话、成长与冒险，画风差异较大，挑选前可先看预告判断风格。</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 更新动态 + 侧栏 -->
+  <section id="update">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>更新动态<small>按时间顺序整理，便于跟进连载内容</small></h2>
+      </div>
+      <div class="update-wrap">
+
+        <div class="update-list">
+          <div class="update-item">
+            <div class="update-badge"><b>剧集</b>更新</div>
+            <div class="update-info">
+              <h3>连载剧集进入中段剧情</h3>
+              <p>主线矛盾逐步展开，适合此前弃剧的观众重新回看前几集梳理人物关系。</p>
+            </div>
+            <span class="update-tag">追更中</span>
+          </div>
+          <div class="update-item">
+            <div class="update-badge"><b>电影</b>上线</div>
+            <div class="update-info">
+              <h3>院线影片进入线上观看阶段</h3>
+              <p>院线放映结束后通常会陆续进入线上渠道，具体时间以发行方公告为准。</p>
+            </div>
+            <span class="update-tag">可关注</span>
+          </div>
+          <div class="update-item">
+            <div class="update-badge"><b>综艺</b>周更</div>
+            <div class="update-info">
+              <h3>周更综艺固定更新节奏</h3>
+              <p>多数综艺保持每周一更，遇到节假日或特别企划可能调整播出安排。</p>
+            </div>
+            <span class="update-tag">固定档</span>
+          </div>
+          <div class="update-item">
+            <div class="update-badge"><b>动漫</b>新番</div>
+            <div class="update-info">
+              <h3>新一季动画陆续开播</h3>
+              <p>新番通常集中在季度初开播，建议先看前两集再决定是否长期追看。</p>
+            </div>
+            <span class="update-tag">新番季</span>
+          </div>
+          <div class="update-item">
+            <div class="update-badge"><b>纪录</b>专题</div>
+            <div class="update-info">
+              <h3>主题纪录片合集整理</h3>
+              <p>按自然、历史、科技等主题归类，方便按兴趣方向集中观看。</p>
+            </div>
+            <span class="update-tag">专题</span>
+          </div>
+        </div>
+
+        <aside>
+          <div class="side-card">
+            <h3>挑选影片的三个思路</h3>
+            <ul class="tip-list">
+              <li><strong>先定时间：</strong>只有半小时就选综艺或短片，两小时以上再考虑长片。</li>
+              <li><strong>再看状态：</strong>疲惫时避开信息密度高的悬疑与烧脑题材。</li>
+              <li><strong>最后看口碑：</strong>参考多方评价，避免只看单一评分做决定。</li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>观看体验提示</h3>
+            <ul class="tip-list">
+              <li>优先选择清晰度稳定、播放流畅的来源，减少中途卡顿。</li>
+              <li>注意音量与字幕设置，外语片建议开启字幕辅助理解。</li>
+              <li>长时间观看注意休息，保护视力比追完一集更重要。</li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 观影指南 -->
+  <section id="guide" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>观影指南<small>从找片到看完，把每一步都说清楚</small></h2>
+      </div>
+      <div class="guide-grid">
+
+        <article class="guide-card">
+          <h3>如何高效找到想看的影片</h3>
+          <p>
+            先用类型缩小范围，再用时长、年份和语言进一步筛选。如果完全没方向，
+            可以从“最近讨论度较高的作品”入手，先看简介和预告，判断题材与节奏是否符合当下心情。
+            把想看的片子加入待看清单，比临时翻找更省时间。
+          </p>
+        </article>
+
+        <article class="guide-card">
+          <h3>剧集与电影的观看节奏差异</h3>
+          <p>
+            电影通常在一到两小时内完成叙事，适合一次性看完；剧集则按集推进，
+            更适合分散在几天内观看。追连载剧时建议留意更新频率，避免在关键剧情处被迫中断，
+            影响整体观感。
+          </p>
+        </article>
+
+        <article class="guide-card">
+          <h3>画质、字幕与音轨怎么选</h3>
+          <p>
+            网络条件一般时，优先保证播放流畅，再考虑清晰度。外语内容建议开启字幕，
+            但字幕大小和位置以不遮挡画面为宜。使用耳机观看时注意音量，
+            长时间高音量对听力有影响。
+          </p>
+        </article>
+
+        <article class="guide-card">
+          <h3>如何判断一部片子是否适合自己</h3>
+          <p>
+            先看题材标签，再看简介中的关键词，例如“悬疑”“家庭”“纪实”等，
+            这些往往比评分更能反映内容风格。若对某些情节较为敏感，
+            可提前查看内容提示，避免观看过程中产生不适。
+          </p>
+        </article>
+
+        <article class="guide-card">
+          <h3>合理安排观看时间</h3>
+          <p>
+            把观看安排在完成主要事务之后，能减少心理负担。睡前尽量避开情绪起伏较大的内容，
+            选择节奏平缓的纪录片或生活类综艺，更有利于放松和入睡。
+          </p>
+        </article>
+
+        <article class="guide-card">
+          <h3>使用影视导航页的注意事项</h3>
+          <p>
+            正规的影视导航页只提供分类与信息整理，不会要求输入账号密码或支付费用。
+            遇到来源不明、强制跳转或要求下载陌生程序的页面，应直接关闭，
+            不要填写个人信息。
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>常见问题<small>关于影视查找与观看的常见疑问</small></h2>
+      </div>
+      <div class="faq-list">
+
+        <details class="faq-item" open>
+          <summary>策驰影院主要提供什么内容？</summary>
+          <div class="faq-body">
+            策驰影院是一个影视内容导航页面，主要按电影、电视剧、综艺、动漫、纪录片等类型整理入口，
+            并汇总热门推荐与更新动态。页面本身用于信息整理与观看参考，
+            具体影片的播放渠道与上线时间以版权方和正规平台的公告为准。
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>怎样快速筛选出适合自己的影片？</summary>
+          <div class="faq-body">
+            建议按“类型 → 时长 → 语言 → 口碑”的顺序逐步缩小范围。先确定自己此刻想看轻松还是紧张的内容，
+            再根据可用时间选择电影或剧集，最后参考多方评价做决定。这样比漫无目的翻找效率更高。
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>剧集更新不稳定怎么办？</summary>
+          <div class="faq-body">
+            连载剧集的更新节奏会受排播安排、节假日等因素影响。可以关注官方的播出信息，
+            或等剧集完结后再一次性观看，能避免因等待更新而中断观感。
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>观看时遇到卡顿或画质不佳如何处理？</summary>
+          <div class="faq-body">
+            可以先检查网络连接是否稳定，适当降低清晰度以保证流畅播放。
+            如果问题持续，建议更换观看时段或设备。使用正规平台通常能获得更稳定的播放体验。
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>如何避免遇到不安全的影视网站？</summary>
+          <div class="faq-body">
+            对要求输入账号密码、支付费用或下载未知程序的页面保持警惕；
+            正规渠道不会以“免费观看”为名索取敏感信息。遇到强制跳转、频繁弹窗的页面，
+            应立即关闭，并优先选择有明确版权信息的平台。
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>这个页面适合哪些人使用？</summary>
+          <div class="faq-body">
+            适合希望快速了解影视分类、寻找观看方向、跟进剧集更新节奏的用户。
+            如果只是想随便看看，也可以从热门推荐或更新动态入手，按兴趣逐步探索。
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#top">
+          <span class="logo-mark">策</span>
+          策驰<span>影院</span>
+        </a>
+        <p>
+          一个专注于影视内容分类与观看参考的导航页面，
+          按类型整理入口，汇总热门推荐与更新动态，帮助用户更快找到想看的作品。
+        </p>
+      </div>
+      <div class="foot-col">
+        <h4>内容分类</h4>
+        <ul>
+          <li><a href="#category">电影</a></li>
+          <li><a href="#category">电视剧</a></li>
+          <li><a href="#category">综艺</a></li>
+          <li><a href="#category">动漫</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>快速导航</h4>
+        <ul>
+          <li><a href="#hot">热门推荐</a></li>
+          <li><a href="#update">更新动态</a></li>
+          <li><a href="#guide">观影指南</a></li>
+          <li><a href="#faq">常见问题</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>使用提示</h4>
+        <ul>
+          <li><a href="#guide">挑选影片思路</a></li>
+          <li><a href="#guide">观看节奏建议</a></li>
+          <li><a href="#faq">安全观看提醒</a></li>
+          <li><a href="#faq">版权与渠道说明</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>策驰影院 · 影视内容导航与观影参考</span>
+      <span>页面信息仅供参考，具体内容以版权方及正规平台公告为准</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var links = document.querySelectorAll('.nav a');
+  links.forEach(function(a){
+    a.addEventListener('click', function(){
+      links.forEach(function(x){ x.classList.remove('active'); });
+      a.classList.add('active');
+    });
+  });
+})();
+</script>
+
+</body>
+                                      </html>
