@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>百搜视频-海量视频聚合搜索与在线观看指南</title>
+<meta name="description" content="百搜视频是一个聚合多平台视频内容的搜索与导航入口，帮助用户快速找到影视、剧集、综艺、动漫、短视频等资源，并提供在线观看、平台选择与使用技巧指南。">
+<meta name="keywords" content="百搜视频,视频搜索,在线观看,影视聚合,剧集导航,视频资源搜索">
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+<style>
+  :root{
+    --bg:#0f1220;
+    --bg-soft:#171a2e;
+    --panel:#1e2238;
+    --panel-2:#262b47;
+    --line:rgba(255,255,255,.08);
+    --text:#eef1ff;
+    --muted:#a3a9c9;
+    --brand:#4f7cff;
+    --brand-2:#22d3ee;
+    --accent:#ff7a59;
+    --radius:16px;
+    --shadow:0 18px 40px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1100px 500px at 12% -10%, rgba(79,124,255,.28), transparent 60%),
+      radial-gradient(900px 460px at 92% 0%, rgba(34,211,238,.18), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{width:min(1180px,92vw);margin:0 auto;}
+
+  /* ---------- header ---------- */
+  header.site-header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(15,18,32,.82);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex;align-items:center;gap:22px;
+    padding:14px 0;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-size:20px;font-weight:800;letter-spacing:.5px;
+    white-space:nowrap;
+  }
+  .logo-mark{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:grid;place-items:center;
+    font-size:15px;color:#08111f;font-weight:900;
+    box-shadow:0 8px 20px rgba(79,124,255,.45);
+  }
+  .logo span.hl{color:var(--brand-2);}
+  nav.main-nav{
+    display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;
+  }
+  nav.main-nav a{
+    padding:8px 14px;border-radius:10px;
+    font-size:15px;color:var(--muted);
+    transition:.2s;
+  }
+  nav.main-nav a:hover,nav.main-nav a.active{
+    color:#fff;background:rgba(79,124,255,.18);
+  }
+  .nav-toggle{
+    display:none;margin-left:auto;
+    background:var(--panel);border:1px solid var(--line);
+    color:var(--text);border-radius:10px;
+    padding:8px 12px;font-size:15px;cursor:pointer;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:60px 0 44px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.35fr .95fr;gap:38px;align-items:center;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--brand-2);
+    background:rgba(34,211,238,.1);
+    border:1px solid rgba(34,211,238,.28);
+    padding:5px 12px;border-radius:999px;margin-bottom:18px;
+  }
+  .badge::before{
+    content:"";width:7px;height:7px;border-radius:50%;
+    background:var(--brand-2);box-shadow:0 0 10px var(--brand-2);
+  }
+  h1{
+    font-size:clamp(28px,4vw,46px);
+    line-height:1.25;margin:0 0 16px;font-weight:800;
+    letter-spacing:.5px;
+  }
+  h1 em{
+    font-style:normal;
+    background:linear-gradient(120deg,var(--brand-2),var(--brand));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{
+    color:var(--muted);font-size:16.5px;max-width:56ch;margin:0 0 26px;
+  }
+  .search-box{
+    display:flex;gap:10px;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;
+    padding:8px;box-shadow:var(--shadow);
+    max-width:560px;
+  }
+  .search-box input{
+    flex:1;background:transparent;border:0;outline:none;
+    color:var(--text);font-size:15.5px;padding:10px 12px;
+  }
+  .search-box input::placeholder{color:#7b82a8;}
+  .search-box button{
+    border:0;cursor:pointer;border-radius:10px;
+    padding:11px 22px;font-size:15px;font-weight:700;color:#08111f;
+    background:linear-gradient(135deg,var(--brand-2),var(--brand));
+    transition:.2s;
+  }
+  .search-box button:hover{filter:brightness(1.08);}
+  .hot-words{
+    margin-top:14px;font-size:13.5px;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  }
+  .hot-words a{
+    padding:4px 11px;border-radius:999px;
+    background:rgba(255,255,255,.05);border:1px solid var(--line);
+    transition:.2s;
+  }
+  .hot-words a:hover{color:#fff;border-color:rgba(79,124,255,.5);}
+
+  .hero-side{
+    background:linear-gradient(160deg,var(--panel),var(--bg-soft));
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);
+  }
+  .hero-side h2{
+    font-size:16px;margin:0 0 16px;color:#fff;
+    display:flex;align-items:center;gap:8px;
+  }
+  .hero-side h2::before{
+    content:"";width:4px;height:16px;border-radius:2px;
+    background:linear-gradient(var(--brand-2),var(--brand));
+  }
+  .stat-list{list-style:none;margin:0;padding:0;display:grid;gap:12px;}
+  .stat-list li{
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);
+    border-radius:12px;padding:11px 14px;font-size:14.5px;color:var(--muted);
+  }
+  .stat-list li b{color:#fff;font-size:15px;font-weight:700;}
+
+  /* ---------- section base ---------- */
+  section{padding:52px 0;}
+  .section-head{
+    display:flex;align-items:flex-end;justify-content:space-between;
+    gap:20px;margin-bottom:26px;flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-size:clamp(21px,2.6vw,27px);margin:0;font-weight:800;
+  }
+  .section-head p{margin:6px 0 0;color:var(--muted);font-size:14.5px;max-width:62ch;}
+  .section-head .more{
+    font-size:14px;color:var(--brand-2);
+    border:1px solid rgba(34,211,238,.3);
+    padding:7px 14px;border-radius:999px;transition:.2s;
+  }
+  .section-head .more:hover{background:rgba(34,211,238,.12);}
+
+  /* ---------- category grid ---------- */
+  .cat-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:16px;
+  }
+  .cat-card{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:20px 18px;transition:.22s;
+    position:relative;overflow:hidden;
+  }
+  .cat-card::after{
+    content:"";position:absolute;inset:auto -30% -60% auto;
+    width:130px;height:130px;border-radius:50%;
+    background:radial-gradient(circle,rgba(79,124,255,.35),transparent 70%);
+    opacity:0;transition:.3s;
+  }
+  .cat-card:hover{transform:translateY(-4px);border-color:rgba(79,124,255,.45);}
+  .cat-card:hover::after{opacity:1;}
+  .cat-card .ico{
+    width:42px;height:42px;border-radius:12px;
+    display:grid;place-items:center;font-size:19px;margin-bottom:12px;
+    background:rgba(79,124,255,.16);color:var(--brand-2);
+  }
+  .cat-card h3{margin:0 0 6px;font-size:16.5px;}
+  .cat-card p{margin:0;font-size:13.5px;color:var(--muted);}
+
+  /* ---------- platform list ---------- */
+  .platform-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;
+  }
+  .platform-card{
+    background:linear-gradient(150deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line);border-radius:14px;padding:20px;
+    display:flex;flex-direction:column;gap:10px;transition:.22s;
+  }
+  .platform-card:hover{border-color:rgba(34,211,238,.4);transform:translateY(-3px);}
+  .platform-card .top{display:flex;align-items:center;gap:12px;}
+  .platform-card .avatar{
+    width:40px;height:40px;border-radius:11px;flex:0 0 40px;
+    display:grid;place-items:center;font-weight:800;font-size:15px;color:#08111f;
+    background:linear-gradient(135deg,var(--brand-2),var(--brand));
+  }
+  .platform-card h3{margin:0;font-size:16px;}
+  .platform-card .tag{font-size:12.5px;color:var(--muted);}
+  .platform-card p{margin:0;font-size:13.8px;color:var(--muted);}
+
+  /* ---------- guide / steps ---------- */
+  .steps{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;
+    counter-reset:step;
+  }
+  .step{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:22px 20px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:"0" counter(step);
+    font-size:26px;font-weight:900;color:rgba(79,124,255,.45);
+    display:block;margin-bottom:10px;letter-spacing:1px;
+  }
+  .step h3{margin:0 0 8px;font-size:16.5px;}
+  .step p{margin:0;font-size:14px;color:var(--muted);}
+
+  /* ---------- tips ---------- */
+  .tips-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;}
+  .tip-list{list-style:none;margin:0;padding:0;display:grid;gap:14px;}
+  .tip-list li{
+    background:var(--panel);border:1px solid var(--line);
+    border-left:3px solid var(--brand);
+    border-radius:12px;padding:16px 18px;
+  }
+  .tip-list li h3{margin:0 0 6px;font-size:15.5px;}
+  .tip-list li p{margin:0;font-size:14px;color:var(--muted);}
+  .side-note{
+    background:linear-gradient(160deg,rgba(79,124,255,.16),rgba(34,211,238,.08));
+    border:1px solid rgba(79,124,255,.28);
+    border-radius:var(--radius);padding:24px;
+  }
+  .side-note h3{margin:0 0 12px;font-size:17px;}
+  .side-note ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.2px;display:grid;gap:9px;}
+
+  /* ---------- faq ---------- */
+  .faq{display:grid;gap:12px;}
+  details.faq-item{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:13px;padding:0 20px;transition:.2s;
+  }
+  details.faq-item[open]{border-color:rgba(79,124,255,.45);}
+  details.faq-item summary{
+    cursor:pointer;list-style:none;padding:17px 0;
+    font-size:15.8px;font-weight:600;display:flex;justify-content:space-between;gap:16px;
+  }
+  details.faq-item summary::-webkit-details-marker{display:none;}
+  details.faq-item summary::after{
+    content:"+";color:var(--brand-2);font-size:20px;line-height:1;transition:.2s;
+  }
+  details.faq-item[open] summary::after{transform:rotate(45deg);}
+  details.faq-item .answer{
+    padding:0 0 18px;color:var(--muted);font-size:14.3px;
+    border-top:1px dashed var(--line);padding-top:14px;
+  }
+
+  /* ---------- footer ---------- */
+  footer.site-footer{
+    border-top:1px solid var(--line);
+    background:rgba(10,12,22,.7);
+    padding:44px 0 26px;margin-top:20px;
+  }
+  .footer-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;
+  }
+  .footer-grid h4{margin:0 0 14px;font-size:15px;color:#fff;}
+  .footer-grid p,.footer-grid a{font-size:13.8px;color:var(--muted);}
+  .footer-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;}
+  .footer-grid a:hover{color:var(--brand-2);}
+  .footer-bottom{
+    margin-top:30px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:13px;color:#7b82a8;display:flex;justify-content:space-between;
+    gap:14px;flex-wrap:wrap;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:960px){
+    .hero-grid{grid-template-columns:1fr;}
+    .tips-layout{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:720px){
+    nav.main-nav{
+      display:none;width:100%;flex-direction:column;
+      padding:10px 0 4px;
+    }
+    nav.main-nav.open{display:flex;}
+    nav.main-nav a{padding:10px 12px;}
+    .nav-toggle{display:block;}
+    .header-inner{flex-wrap:wrap;}
+    .hero{padding:40px 0 30px;}
+    section{padding:40px 0;}
+    .search-box{flex-direction:column;}
+    .search-box button{width:100%;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="#top">
+      <span class="logo-mark">百</span>
+      百搜<span class="hl">视频</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="展开导航">菜单</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="#categories" class="active">视频分类</a>
+      <a href="#platforms">平台导航</a>
+      <a href="#guide">搜索指南</a>
+      <a href="#tips">使用技巧</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="badge">聚合搜索 · 一站直达</span>
+        <h1>百搜视频：<em>一次搜索</em>，找到想看的视频内容</h1>
+        <p class="lead">
+          百搜视频是一个面向视频内容的搜索与导航入口。当你只记得片段剧情、演员名字或节目名称，却不确定在哪个平台播出时，可以在这里先确定内容类型，再前往对应平台观看，减少在多个应用之间反复切换的时间。
+        </p>
+        <form class="search-box" onsubmit="return false;">
+          <input type="text" id="searchInput" placeholder="输入片名、剧集、综艺、动漫或演员名称…" aria-label="搜索视频">
+          <button type="button" id="searchBtn">搜索视频</button>
+        </form>
+        <div class="hot-words">
+          <span>热门方向：</span>
+          <a href="#categories">国产剧集</a>
+          <a href="#categories">电影</a>
+          <a href="#categories">综艺</a>
+          <a href="#categories">动漫</a>
+          <a href="#categories">纪录片</a>
+          <a href="#categories">短视频</a>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <h2>使用前先了解</h2>
+        <ul class="stat-list">
+          <li><span>内容来源</span><b>各视频平台</b></li>
+          <li><span>主要作用</span><b>搜索与导航</b></li>
+          <li><span>观看方式</span><b>跳转平台播放</b></li>
+          <li><span>适用设备</span><b>手机 / 电脑</b></li>
+          <li><span>费用说明</span><b>以平台为准</b></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 分类 -->
+  <section id="categories">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>视频内容分类</h2>
+          <p>按内容形态划分，先确定你要找的是哪一类视频，再进入对应的搜索路径，通常比直接输入模糊关键词更有效率。</p>
+        </div>
+        <a class="more" href="#platforms">查看平台导航</a>
+      </div>
+
+      <div class="cat-grid">
+        <article class="cat-card">
+          <div class="ico">剧</div>
+          <h3>电视剧集</h3>
+          <p>国产剧、海外剧、短剧等连续剧集，适合按剧名或演员检索。</p>
+        </article>
+        <article class="cat-card">
+          <div class="ico">影</div>
+          <h3>电影长片</h3>
+          <p>院线电影、网络电影与经典老片，注意区分上映与上线时间。</p>
+        </article>
+        <article class="cat-card">
+          <div class="ico">综</div>
+          <h3>综艺节目</h3>
+          <p>季播综艺、访谈、真人秀，按季数和期数定位更准确。</p>
+        </article>
+        <article class="cat-card">
+          <div class="ico">漫</div>
+          <h3>动漫番剧</h3>
+          <p>国产动画、日本番剧与动画电影，留意正版引进情况。</p>
+        </article>
+        <article class="cat-card">
+          <div class="ico">纪</div>
+          <h3>纪录片</h3>
+          <p>人文、自然、历史与科技类纪实内容，多为平台自制或引进。</p>
+        </article>
+        <article class="cat-card">
+          <div class="ico">短</div>
+          <h3>短视频</h3>
+          <p>资讯、生活、知识与娱乐类短视频，节奏快、时长短。</p>
+        </article>
+        <article class="cat-card">
+          <div class="ico">体</div>
+          <h3>体育赛事</h3>
+          <p>赛事直播与集锦回放，版权归属明确，需关注播出时间。</p>
+        </article>
+        <article class="cat-card">
+          <div class="ico">课</div>
+          <h3>知识课程</h3>
+          <p>公开课、讲座与技能教学，适合按主题而非片名搜索。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 平台导航 -->
+  <section id="platforms">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>常见视频平台导航</h2>
+          <p>不同平台的内容库和版权范围不同。以下按内容侧重点做归纳，方便你判断某类视频更可能出现在哪一类平台。具体片源请以平台实际展示为准。</p>
+        </div>
+      </div>
+
+      <div class="platform-grid">
+        <article class="platform-card">
+          <div class="top">
+            <div class="avatar">综</div>
+            <div>
+              <h3>综合长视频平台</h3>
+              <span class="tag">剧集 · 电影 · 综艺</span>
+            </div>
+          </div>
+          <p>内容覆盖面广，自制剧与版权剧集中，适合查找主流影视剧和热门综艺。</p>
+        </article>
+
+        <article class="platform-card">
+          <div class="top">
+            <div class="avatar">弹</div>
+            <div>
+              <h3>弹幕与二次元社区</h3>
+              <span class="tag">动漫 · 番剧 · 兴趣内容</span>
+            </div>
+          </div>
+          <p>番剧、动画与兴趣向内容较集中，社区氛围强，适合追番和看解说。</p>
+        </article>
+
+        <article class="platform-card">
+          <div class="top">
+            <div class="avatar">短</div>
+            <div>
+              <h3>短视频平台</h3>
+              <span class="tag">资讯 · 生活 · 娱乐</span>
+            </div>
+          </div>
+          <p>以竖屏短视频为主，更新快、信息密度高，适合快速了解热点。</p>
+        </article>
+
+        <article class="platform-card">
+          <div class="top">
+            <div class="avatar">卫</div>
+            <div>
+              <h3>电视台与官方客户端</h3>
+              <span class="tag">新闻 · 晚会 · 直播</span>
+            </div>
+          </div>
+          <p>新闻节目、大型晚会和赛事直播通常有官方渠道，权威性较高。</p>
+        </article>
+
+        <article class="platform-card">
+          <div class="top">
+            <div class="avatar">学</div>
+            <div>
+              <h3>知识学习类平台</h3>
+              <span class="tag">课程 · 讲座 · 科普</span>
+            </div>
+          </div>
+          <p>适合按学科或主题查找系统课程，内容结构完整，适合长期学习。</p>
+        </article>
+
+        <article class="platform-card">
+          <div class="top">
+            <div class="avatar">音</div>
+            <div>
+              <h3>音乐与演出平台</h3>
+              <span class="tag">MV · 现场 · 音乐综艺</span>
+            </div>
+          </div>
+          <p>音乐类视频、演唱会片段与音乐综艺的主要聚集地。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 搜索指南 -->
+  <section id="guide">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>如何更高效地搜到想看的视频</h2>
+          <p>搜索视频失败，多数时候不是内容不存在，而是关键词和检索路径不对。下面四步可以显著提高命中率。</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <article class="step">
+          <h3>先确定内容类型</h3>
+          <p>先判断它是剧集、电影、综艺还是短视频。类型不同，主要分发的平台往往不同。</p>
+        </article>
+        <article class="step">
+          <h3>提炼核心关键词</h3>
+          <p>用片名、主角名或标志性情节作为关键词，避免使用“那个很火的视频”这类模糊描述。</p>
+        </article>
+        <article class="step">
+          <h3>加上限定条件</h3>
+          <p>可补充年份、地区、季数等信息，例如“2024 国产剧”“第二季”，缩小结果范围。</p>
+        </article>
+        <article class="step">
+          <h3>核对平台与版权</h3>
+          <p>确认该内容在哪个平台上线，并留意是否需要会员或是否已下架，避免无效跳转。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使用技巧 -->
+  <section id="tips">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>使用技巧与注意事项</h2>
+          <p>视频搜索涉及版权、清晰度和设备兼容等多个因素，了解这些细节可以少走弯路。</p>
+        </div>
+      </div>
+
+      <div class="tips-layout">
+        <ul class="tip-list">
+          <li>
+            <h3>优先选择官方渠道</h3>
+            <p>官方平台在画质、字幕和播放稳定性上更有保障，也能避免来源不明的页面带来的风险。</p>
+          </li>
+          <li>
+            <h3>注意区分“预告”和“正片”</h3>
+            <p>不少搜索结果实际是预告片、花絮或解说，观看前先确认视频时长和标题描述。</p>
+          </li>
+          <li>
+            <h3>留意会员与付费内容</h3>
+            <p>部分剧集和电影需要会员或单独付费，提前了解可以避免看到一半被中断。</p>
+          </li>
+          <li>
+            <h3>关注更新节奏</h3>
+            <p>连载剧集和综艺通常按周更新，收藏或追更功能比反复搜索更方便。</p>
+          </li>
+          <li>
+            <h3>谨慎对待陌生链接</h3>
+            <p>对要求下载不明应用、输入账号密码或跳转多次的页面，建议直接关闭。</p>
+          </li>
+        </ul>
+
+        <aside class="side-note">
+          <h3>搜索前的三个自问</h3>
+          <ul>
+            <li>我找的是完整作品，还是某个片段或解说？</li>
+            <li>这部内容大概是什么年份、哪个地区出品？</li>
+            <li>我是否已经知道它大概在哪个平台播出？</li>
+          </ul>
+          <p style="margin:16px 0 0;font-size:13.8px;color:var(--muted);">
+            把这三个问题想清楚，再回到搜索框输入关键词，命中率通常会明显提升。
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>常见问题</h2>
+          <p>关于百搜视频这类视频搜索与导航入口，用户最常提出的几个问题。</p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <details class="faq-item" open>
+          <summary>百搜视频本身提供视频播放吗？</summary>
+          <div class="answer">
+            这类入口的主要作用是帮助用户搜索和定位视频内容，实际播放通常由各视频平台的官方页面完成。具体能否观看、是否需要会员，取决于对应平台的内容授权和播放规则。
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>为什么同一个片名会搜出很多不同结果？</summary>
+          <div class="answer">
+            常见原因包括：同名作品较多、存在预告片与正片之分、不同平台各自上传了相关片段，以及部分结果是解说或二次创作内容。建议结合年份、演员或平台信息进一步筛选。
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>搜索不到想看的视频是什么原因？</summary>
+          <div class="answer">
+            可能是关键词不够准确、内容已从平台下架、版权到期更换了播出平台，或者该内容本身并未在网络上公开提供。可以尝试更换关键词或调整年份、地区等限定条件。
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>使用视频搜索时需要注意什么？</summary>
+          <div class="answer">
+            建议优先访问官方或正规平台，注意保护个人账号信息，不随意下载来源不明的应用，也不要轻信要求付费解锁全部内容的陌生页面。
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>手机上搜索和电脑上搜索有区别吗？</summary>
+          <div class="answer">
+            搜索结果本身差别不大，但手机端更依赖各平台的独立应用，电脑端在网页浏览和多标签对比上更方便。可以根据使用场景选择合适的设备。
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>百搜视频</h4>
+        <p>面向视频内容的搜索与导航入口，帮助用户按类型、关键词和平台快速定位想看的内容，减少在多平台之间反复查找的时间。</p>
+      </div>
+      <div>
+        <h4>内容分类</h4>
+        <ul>
+          <li><a href="#categories">电视剧集</a></li>
+          <li><a href="#categories">电影长片</a></li>
+          <li><a href="#categories">综艺节目</a></li>
+          <li><a href="#categories">动漫番剧</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>使用帮助</h4>
+        <ul>
+          <li><a href="#guide">搜索指南</a></li>
+          <li><a href="#tips">使用技巧</a></li>
+          <li><a href="#faq">常见问题</a></li>
+          <li><a href="#platforms">平台导航</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>温馨提示</h4>
+        <ul>
+          <li>优先选择官方平台观看</li>
+          <li>注意保护个人账号信息</li>
+          <li>尊重内容版权与授权范围</li>
+          <li>谨慎对待来源不明的链接</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>百搜视频 · 视频搜索与导航参考</span>
+      <span>页面内容仅供检索与信息参考，具体片源以各平台实际展示为准</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var nav = document.getElementById('mainNav');
+    if(toggle && nav){
+      toggle.addEventListener('click', function(){
+        nav.classList.toggle('open');
+      });
+      nav.addEventListener('click', function(e){
+        if(e.target.tagName === 'A'){
+          nav.classList.remove('open');
+        }
+      });
+    }
+
+    var btn = document.getElementById('searchBtn');
+    var input = document.getElementById('searchInput');
+    if(btn && input){
+      btn.addEventListener('click', function(){
+        var kw = input.value.trim();
+        if(!kw){
+          input.focus();
+          return;
+        }
+        var target = document.getElementById('categories');
+        if(target){
+          target.scrollIntoView({behavior:'smooth'});
+        }
+      });
+      input.addEventListener('keydown', function(e){
+        if(e.key === 'Enter'){
+          e.preventDefault();
+          btn.click();
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+                </html>
